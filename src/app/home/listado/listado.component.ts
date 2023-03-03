@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./listado.component.css']
 })
 export class ListadoComponent {
-
+  isHidden: boolean = false
+  
+  open() {
+    this.isHidden = !this.isHidden
+  }
 }
