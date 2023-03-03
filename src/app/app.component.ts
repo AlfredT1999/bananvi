@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { HomeComponent } from './home/home.component';
 
 @Component({
   selector: 'app-root',
@@ -7,14 +6,11 @@ import { HomeComponent } from './home/home.component';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  isShow = true;
-  title = 'bananvi';
-
-  showHide(event: any) {
-    if(event instanceof HomeComponent) {
-      this.isShow=false
-    } else { 
-      this.isShow=true
-    }
-  } 
+  onActivate(event: any) {
+    window.scroll({ 
+      top: 0, 
+      left: 0, 
+      behavior: 'smooth' 
+    });
+  }
 }

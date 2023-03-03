@@ -12,6 +12,9 @@ import { LoaderService } from './services/loader.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoaderInterceptor } from './interceptors/loader-interceptor.service';
 import { ProductComponent } from './home/product/product.component';
+import { PaymentComponent } from './payment/payment.component';
+import { PrivacyPolicyComponent } from './footer/privacy-policy/privacy-policy.component';
+import { ConditionsTermsComponent } from './footer/conditions-terms/conditions-terms.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,10 @@ import { ProductComponent } from './home/product/product.component';
     FooterComponent,
     ListadoComponent,
     LoaderComponent,
-    ProductComponent
+    ProductComponent,
+    PaymentComponent,
+    PrivacyPolicyComponent,
+    ConditionsTermsComponent
   ],
   imports: [
     BrowserModule,

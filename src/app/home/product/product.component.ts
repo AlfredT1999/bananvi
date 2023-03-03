@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent {
-
+  isHidden: boolean = false
+  
+  open() {
+    this.isHidden = !this.isHidden
+  }
 }
