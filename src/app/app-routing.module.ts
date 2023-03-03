@@ -5,6 +5,9 @@ import { PrivacyPolicyComponent } from './footer/privacy-policy/privacy-policy.c
 import { HomeComponent } from './home/home.component';
 import { ListadoComponent } from './home/listado/listado.component';
 import { ProductComponent } from './home/product/product.component';
+import { AboutComponent } from './navbar/about/about.component';
+import { ContactComponent } from './navbar/contact/contact.component';
+import { ReviewComponent } from './navbar/review/review.component';
 import { PaymentComponent } from './payment/payment.component';
 
 const routes: Routes = [
@@ -31,6 +34,18 @@ const routes: Routes = [
   {
     path: 'conditionsTerms',
     component: ConditionsTermsComponent
+  },
+  {
+    path: 'about',
+    component: AboutComponent
+  },
+  {
+    path: 'review',
+    component: ReviewComponent
+  },
+  {
+    path: 'contact',
+    component: ContactComponent
   }
 ];
 

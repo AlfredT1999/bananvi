@@ -15,6 +15,9 @@ import { ProductComponent } from './home/product/product.component';
 import { PaymentComponent } from './payment/payment.component';
 import { PrivacyPolicyComponent } from './footer/privacy-policy/privacy-policy.component';
 import { ConditionsTermsComponent } from './footer/conditions-terms/conditions-terms.component';
+import { AboutComponent } from './navbar/about/about.component';
+import { ReviewComponent } from './navbar/review/review.component';
+import { ContactComponent } from './navbar/contact/contact.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,10 @@ import { ConditionsTermsComponent } from './footer/conditions-terms/conditions-t
     ProductComponent,
     PaymentComponent,
     PrivacyPolicyComponent,
-    ConditionsTermsComponent
+    ConditionsTermsComponent,
+    AboutComponent,
+    ReviewComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,
