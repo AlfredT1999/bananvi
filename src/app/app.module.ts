@@ -18,6 +18,7 @@ import { ConditionsTermsComponent } from './footer/conditions-terms/conditions-t
 import { AboutComponent } from './navbar/about/about.component';
 import { ReviewComponent } from './navbar/review/review.component';
 import { ContactComponent } from './navbar/contact/contact.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { ContactComponent } from './navbar/contact/contact.component';
     ConditionsTermsComponent,
     AboutComponent,
     ReviewComponent,
-    ContactComponent
+    ContactComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
