@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./payment.component.css']
 })
 export class PaymentComponent {
+  isCash: boolean = true
 
+  cash(value: boolean) {
+    this.isCash = value
+  }
 }
