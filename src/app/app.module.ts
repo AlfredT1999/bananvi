@@ -19,6 +19,8 @@ import { AboutComponent } from './navbar/about/about.component';
 import { ReviewComponent } from './navbar/review/review.component';
 import { ContactComponent } from './navbar/contact/contact.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { NotFoundComponent } from './not-found/not-found.component';
     AboutComponent,
     ReviewComponent,
     ContactComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

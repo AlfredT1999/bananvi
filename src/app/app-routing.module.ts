@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
 import { ConditionsTermsComponent } from './footer/conditions-terms/conditions-terms.component';
 import { PrivacyPolicyComponent } from './footer/privacy-policy/privacy-policy.component';
 import { HomeComponent } from './home/home.component';
@@ -47,6 +49,14 @@ const routes: Routes = [
   {
     path: 'contact',
     component: ContactComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
   },
   {
     path: '**',
