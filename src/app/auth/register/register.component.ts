@@ -23,7 +23,7 @@ export class RegisterComponent {
   ]);
   phoneNumber = new FormControl('', [
     Validators.required,
-    Validators.minLength(13),
+    Validators.minLength(9),
     Validators.maxLength(13)
   ]);
   password = new FormControl('', [
@@ -40,13 +40,25 @@ export class RegisterComponent {
     phoneNumber: this.phoneNumber
   }, []);
 
-  constructor(private auth: AuthService) {
-
-  }
+  constructor(private auth: AuthService) {}
 
   async signup() {
     try { 
-      await this.auth.createUser(this.signupForm.value as IUserAuth);
+      let formSignup: IUserAuth = {
+        catUserRolId: "E90CF135-E98C-409C-A668-4B78B811644E",
+        infoUserGivenName: this.signupForm.value.givenname as string,
+        infoUserSurname: this.signupForm.value.surname as string,
+        infoUserEmail: this.signupForm.value.email as string,
+        infoUserPhoneNumber: this.signupForm.value.phoneNumber as string,
+        infoUserAddress: "",
+        infoUserActive: true,
+        infoUserToken: "",
+        infoUserPasswordHash: "",
+        infoUserPasswordSalt: "",
+        password: this.signupForm.value.password as string
+      }
+
+      await this.auth.createUser(formSignup);
     } 
     catch (err) {
       console.error(err);

@@ -12,6 +12,8 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   public async createUser(userInfo: IUserAuth) {
-    return this.http.post(URL + '/Auth/Signup', userInfo)
+    var response = this.http.post(URL + '/Auth/Signup', userInfo).subscribe();
+    return response
   }
+
 }
