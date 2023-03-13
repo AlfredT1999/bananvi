@@ -9,7 +9,7 @@ import { FooterComponent } from './footer/footer.component';
 import { ListadoComponent } from './home/listado/listado.component';
 import { LoaderComponent } from './loader/loader.component';
 import { LoaderService } from './services/loader.service';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoaderInterceptor } from './interceptors/loader-interceptor.service';
 import { ProductComponent } from './home/product/product.component';
 import { PaymentComponent } from './payment/payment.component';
@@ -21,6 +21,7 @@ import { ContactComponent } from './navbar/contact/contact.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,10 @@ import { RegisterComponent } from './auth/register/register.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
+    HttpClientModule
   ],
   providers: [
     LoaderService,
