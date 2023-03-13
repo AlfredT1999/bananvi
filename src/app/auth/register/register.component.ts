@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import IResponse from 'src/app/models/IResponse';
 import IUserAuth from 'src/app/models/IUserAuth';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -40,12 +42,12 @@ export class RegisterComponent {
     phoneNumber: this.phoneNumber
   }, []);
 
-  constructor(private auth: AuthService) {}
+  constructor(private auth: AuthService, private router: Router) {}
 
   async signup() {
     try { 
       let formSignup: IUserAuth = {
-        catUserRolId: "E90CF135-E98C-409C-A668-4B78B811644E",
+        catUserRolId: "",
         infoUserGivenName: this.signupForm.value.givenname as string,
         infoUserSurname: this.signupForm.value.surname as string,
         infoUserEmail: this.signupForm.value.email as string,
@@ -58,7 +60,9 @@ export class RegisterComponent {
         password: this.signupForm.value.password as string
       }
 
-      await this.auth.createUser(formSignup);
+      await this.auth.createUser(formSignup)
+      
+      this.router.navigate(['/'])
     } 
     catch (err) {
       console.error(err);

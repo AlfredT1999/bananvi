@@ -9,11 +9,12 @@ const URL = "https://localhost:7240/api"
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    
+  }
 
   public async createUser(userInfo: IUserAuth) {
-    var response = this.http.post(URL + '/Auth/Signup', userInfo).subscribe();
-    return response
+    this.http.post<any>(URL + '/Auth/Signup', userInfo).subscribe()
   }
 
 }
