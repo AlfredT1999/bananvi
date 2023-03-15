@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import IResponse from 'src/app/models/IResponse';
-import IUserAuth from 'src/app/models/IUserAuth';
+import IUserAuth from 'src/app/models/auth/ISignup';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -42,7 +41,7 @@ export class RegisterComponent {
     phoneNumber: this.phoneNumber
   }, []);
 
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(private auth: AuthService, private router: Router) { }
 
   async signup() {
     try { 
@@ -59,8 +58,8 @@ export class RegisterComponent {
         infoUserPasswordSalt: "",
         password: this.signupForm.value.password as string
       }
-
-      await this.auth.createUser(formSignup)
+      
+      await this.auth.signup(formSignup)
       
       this.router.navigate(['/'])
     } 

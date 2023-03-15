@@ -1,4 +1,4 @@
-export default interface IUserAuth {
+export default interface ISignup {
     catUserRolId: string,
     infoUserGivenName: string,
     infoUserSurname: string,

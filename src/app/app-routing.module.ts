@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AddSaladComponent } from './admin/add-salad/add-salad.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { ConditionsTermsComponent } from './footer/conditions-terms/conditions-terms.component';
@@ -57,6 +58,10 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent
+  },
+  {
+    path: 'add-salad',
+    component: AddSaladComponent
   },
   {
     path: '**',

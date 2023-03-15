@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import IContact from 'src/app/models/IContact';
+import { ContactService } from 'src/app/services/contact.service';
 
 @Component({
   selector: 'app-contact',
@@ -26,11 +28,21 @@ export class ContactComponent {
     email: this.email
   }, []);
 
-  constructor() {
-    
-  }
+  constructor(private contactService: ContactService) { }
 
-  contact() {
+  async contact() {
+    try {
+      let contact: IContact = {
+        email: this.contactForm.value.email as string,
+        tema: this.contactForm.value.tema as string,
+        mensaje: this.contactForm.value.mensaje as string
+      }  
 
+      await this.contactService.send(contact)
+    } 
+    catch (err) {
+      console.error(err);
+      return 
+    }
   }
 }
