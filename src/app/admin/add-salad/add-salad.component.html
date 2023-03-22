@@ -1,7 +1,18 @@
-<div class="isolate bg-white p-8 mt-10">
-    <h1 class="font-sans font-semibold text-2xl mt-5 mb-5 text-center">
-        Agregar ensalada
-    </h1>
+<div class="isolate bg-white p-8 md:p-8 lg:p-48 mt-10">
+    <div class="flex items-center justify-between mb-10">
+        <h1 class="font-sans font-semibold text-2xl mt-5 mb-5 text-center">
+            Agregar ensalada
+        </h1>
+        <button 
+            routerLink="/add-ingredient"
+            type="button" 
+            class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700
+            hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 
+            dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+        >
+            Agregar ingredientes
+        </button>
+    </div>
     <main>
         <div class="bg-white">
             <form>
@@ -47,6 +58,29 @@
                         Descripción de la ensalada
                     </label>
                 </div>
+                <div class="grid md:grid-cols-2 md:gap-6">
+                    <div class="relative z-0 w-full mb-6 group">
+                        <input 
+                            type="number" 
+                            name="price"
+                            id="price" 
+                            class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 
+                            border-b-2 border-gray-300 appearance-none dark:text-black dark:border-gray-600 
+                            dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" 
+                            placeholder=" " 
+                            required 
+                        />
+                        <label 
+                            for="price" 
+                            class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300
+                            transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 
+                            peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 
+                            peer-focus:scale-75 peer-focus:-translate-y-6"
+                        >
+                            Establce el precio
+                        </label>
+                    </div>
+                </div>
                 <div class="relative z-0 w-full mb-6 group">
                     <button 
                         id="dropdownDefaultButton" 
@@ -55,10 +89,16 @@
                         font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 
                         dark:hover:bg-blue-700 dark:focus:ring-blue-800" 
                         type="button"
+                        (click)="open()"
                     >
-                        Ingredientes <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
+                        Ingredientes <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
                     <!-- Dropdown menu -->
-                    <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                    <div 
+                        id="dropdown" 
+                        class="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+                        [ngClass]="{ 'hidden': !isHidden, 'visible': isHidden}"
+                    >
                         <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
                             <li>
                                 <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
@@ -83,38 +123,17 @@
                         </ul>
                     </div>
                 </div>
-                <div class="grid md:grid-cols-2 md:gap-6">
-                    <div class="relative z-0 w-full mb-6 group">
-                        <input 
-                            type="number" 
-                            name="price"
-                            id="price" 
-                            class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 
-                            border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 
-                            dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" 
-                            placeholder=" " 
-                            required 
-                        />
-                        <label 
-                            for="price" 
-                            class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300
-                            transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 
-                            peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 
-                            peer-focus:scale-75 peer-focus:-translate-y-6"
-                        >
-                            Establce el precio
-                        </label>
-                    </div>
-                </div>
 
-                <button 
-                    type="submit" 
-                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none 
-                    focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 
-                    text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                >
-                    Agrega
-                </button>
+                <div class="flex justify-end">
+                    <button 
+                        type="submit" 
+                        class="text-white bg-green-700 hover:bg-blue-800 focus:ring-4 focus:outline-none 
+                        focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 
+                        text-center dark:bg-greem-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                    >
+                        Agrega
+                    </button>
+                </div>
             </form>
         </div>
     </main>

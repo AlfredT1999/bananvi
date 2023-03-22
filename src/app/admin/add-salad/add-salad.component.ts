@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./add-salad.component.css']
 })
 export class AddSaladComponent {
-
+  isHidden: boolean = false
+  
+  open() {
+    this.isHidden = !this.isHidden
+  }
 }
