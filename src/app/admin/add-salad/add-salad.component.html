@@ -1,5 +1,28 @@
 <div class="isolate bg-white p-8 md:p-8 lg:p-48 mt-10">
+    <!-- Header: -->
     <div class="flex items-center justify-between mb-10">
+        <button 
+            routerLink="/listado"
+            type="button" 
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 
+            font-medium rounded-full text-sm px-2 py-2 text-center inline-flex items-center mr-2 dark:bg-blue-600 
+            dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        >
+            <svg 
+                aria-hidden="true" 
+                class="w-4 h-4 rotate-180" 
+                fill="currentColor" 
+                viewBox="0 0 20 20" 
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <path 
+                    fill-rule="evenodd" 
+                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 
+                    11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" 
+                    clip-rule="evenodd"></path>
+            </svg>
+            <span class="sr-only">Icon description</span>
+        </button>
         <h1 class="font-sans font-semibold text-2xl mt-5 mb-5 text-center">
             Agregar ensalada
         </h1>
@@ -13,14 +36,16 @@
             Agregar ingredientes
         </button>
     </div>
+    
     <main>
         <div class="bg-white">
-            <form>
+            <form [formGroup]="addSaladForm" (ngSubmit)="AddSalad()">
                 <div class="relative z-0 w-full mb-6 group">
-                    <input 
+                    <input
+                        [formControl]="saladTypeTitle" 
                         type="text" 
-                        name="title" 
-                        id="title" 
+                        name="saladTypeTitle" 
+                        id="saladTypeTitle" 
                         class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 
                         border-b-2 border-gray-300 appearance-none dark:text-black dark:border-gray-600 
                         dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" 
@@ -34,14 +59,16 @@
                         peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 
                         peer-focus:scale-75 peer-focus:-translate-y-6"
                     >
-                        Titulo de la ensalada
+                        Nombre de la ensalada
                     </label>
                 </div>
+
                 <div class="relative z-0 w-full mb-6 group">
                     <input 
                         type="text" 
-                        name="description" 
-                        id="description" 
+                        [formControl]="saladTypeDescription"
+                        name="saladTypeDescription" 
+                        id="saladTypeDescription" 
                         class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 
                         appearance-none dark:text-black dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 
                         focus:border-blue-600 peer" 
@@ -58,12 +85,14 @@
                         Descripción de la ensalada
                     </label>
                 </div>
+
                 <div class="grid md:grid-cols-2 md:gap-6">
                     <div class="relative z-0 w-full mb-6 group">
                         <input 
+                            [formControl]="saladTypePrice"
                             type="number" 
-                            name="price"
-                            id="price" 
+                            name="saladTypePrice"
+                            id="saladTypePrice" 
                             class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 
                             border-b-2 border-gray-300 appearance-none dark:text-black dark:border-gray-600 
                             dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" 
@@ -81,55 +110,99 @@
                         </label>
                     </div>
                 </div>
-                <div class="relative z-0 w-full mb-6 group">
+
+                <!-- button to add ingredient: -->
+                <div>
                     <button 
-                        id="dropdownDefaultButton" 
-                        data-dropdown-toggle="dropdown" 
-                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 
-                        font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 
-                        dark:hover:bg-blue-700 dark:focus:ring-blue-800" 
-                        type="button"
-                        (click)="open()"
+                        type="button" 
+                        (click)="listOfIngredients()"
+                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none 
+                        focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 
+                        text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mt-1 ml-1"
                     >
-                        Ingredientes <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        Ver Ingredientes
                     </button>
-                    <!-- Dropdown menu -->
+
                     <div 
-                        id="dropdown" 
-                        class="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
-                        [ngClass]="{ 'hidden': !isHidden, 'visible': isHidden}"
+                        class="grid grid-cols-4 gap-4 mt-5" 
+                        *ngIf="this.ingredientsService.listIngredientsToAdd.length"
                     >
-                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
-                            <li>
-                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                    Dashboard
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                    Settings
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                    Earnings
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                    Sign out
-                                </a>
-                            </li>
-                        </ul>
+                        <div *ngFor="let ingredient of this.ingredientsService.listIngredientsToAdd">
+                            <span 
+                                class="bg-yellow-100 text-yellow-800 text-sm font-medium mr-2 px-2.5 
+                                py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300"
+                            >
+                                {{ingredient.ingredientType}}
+                            </span>
+                        </div>
                     </div>
                 </div>
 
+                <!-- List of ingredients: -->
+                <div 
+                    [ngClass]="{ 'hidden': !showTable, 'visible': showTable}"
+                    class="relative overflow-x-auto shadow-md sm:rounded-lg mt-10"
+                >
+                    <div class="flex justify-end">
+                        <button 
+                            type="button"
+                            (click)="showTableFunc()"
+                            class="font-medium text-red-600 dark:text-red-500 hover:underline"
+                        >
+                            Ocultar
+                        </button>
+                    </div>
+
+                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">
+                                    Ingredientes
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Gramos
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Precio
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Acción
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let ingredient of listIngredients">
+                            <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    {{ingredient.ingredientType}}
+                                </th>
+                                <td class="px-6 py-4">
+                                    {{ingredient.ingredientGrams}} gr
+                                </td>
+                                <td class="px-6 py-4">
+                                    ${{ingredient.ingredientPrice}}.00 MXN
+                                </td>
+                                <td class="px-6 py-4">
+                                    <button 
+                                        (click)="getIngredient(ingredient.id!)" 
+                                        type="button"
+                                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                                    >
+                                        Secciona
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- button to add: -->
                 <div class="flex justify-end">
                     <button 
                         type="submit" 
+
                         class="text-white bg-green-700 hover:bg-blue-800 focus:ring-4 focus:outline-none 
                         focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 
-                        text-center dark:bg-greem-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                        text-center dark:bg-greem-600 dark:hover:bg-green-700 dark:focus:ring-green-800 mt-5"
                     >
                         Agrega
                     </button>

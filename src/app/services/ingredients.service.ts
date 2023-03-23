@@ -11,6 +11,8 @@ const URL = "https://localhost:7240/api"
 })
 export class IngredientsService {
   response!: IResponse
+  listIngredientsToAdd: ISaladIngredientModel[] = []
+  flag: boolean = false
 
   constructor(private http: HttpClient) { }
 
@@ -27,6 +29,18 @@ export class IngredientsService {
     return this.http.get<any>(URL + '/IngredientsHandler/GetIngredientById?ingredientId=' + ingredientId)
     .pipe(
       map(res => {
+        this.listIngredientsToAdd.forEach(ingredient => {
+          if(ingredient.id === res.object.id) {
+            this.flag = true
+          }
+        });
+
+        if(!this.flag) {
+          this.listIngredientsToAdd.push(res.object)
+        }
+
+        this.flag = false
+        
         return res
       })
     )

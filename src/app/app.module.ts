@@ -23,6 +23,7 @@ import { RegisterComponent } from './auth/register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddSaladComponent } from './admin/add-salad/add-salad.component';
 import { AddIngredientsComponent } from './admin/add-ingredients/add-ingredients.component';
+import { TableIngredientsComponent } from './admin/table-ingredients/table-ingredients.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { AddIngredientsComponent } from './admin/add-ingredients/add-ingredients
     LoginComponent,
     RegisterComponent,
     AddSaladComponent,
-    AddIngredientsComponent
+    AddIngredientsComponent,
+    TableIngredientsComponent
   ],
   imports: [
     BrowserModule,

@@ -91,7 +91,7 @@ export class AddIngredientsComponent {
         ingredientPrice: this.addIngredientForm.value.ingredient_price as number,
         ingredientType: this.addIngredientForm.value.ingredient_type as string,
       }  
-
+      
       // Update
       if(this.ingredientId) {
         dataIngredient.id = this.ingredientId
@@ -103,6 +103,8 @@ export class AddIngredientsComponent {
       this.res$.pipe(
         delay(1000),
         map((data: IResponse) => {
+          console.log(data);
+          
           if(data.success) {
             this.successToast = true
           } else {
