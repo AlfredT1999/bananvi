@@ -11,7 +11,7 @@
                     BANANVI
                 </h2>
                 <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">
-                    Ensalada Simple
+                    {{salad.saladTypeTitle}}
                 </h1>
                 <div class="flex mb-4">
                     <span class="flex items-center">
@@ -34,20 +34,31 @@
                     </span>
                 </div>
                 <p class="leading-relaxed mb-5">
-                    Fam locavore kickstarter distillery. Mixtape chillwave tumeric sriracha taximy chia microdosing tilde DIY. 
-                    XOXO fam indxgo juiceramps cornhole raw denim forage brooklyn. Everyday carry +1 seitan poutine tumeric. 
-                    Gastropub blue bottle austin listicle pour-over, neutra jean shorts keytar banjo tattooed umami cardigan.
+                    {{salad.saladTypeDescription}}
+                </p>
+
+                <p class="leading-relaxed mb-5" *ngFor="let ingredient of salad.ingredients">
+                    {{ingredient.ingredientType}}
                 </p>
                 
                 <div class="flex">
                     <span class="title-font font-medium text-2xl text-gray-900">
-                        $70.00 MXN
+                        ${{salad.saladTypePrice}} MXN
                     </span>
                     <button 
-                        class="flex ml-auto text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded"
+                        *ngIf="!disable"
+                        class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded"
                         (click)="open()"
                     >
                         Agregar al carrito
+                    </button>
+
+                    <button 
+                        *ngIf="disable"
+                        class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded"
+                        (click)="open()"
+                    >
+                        Ver carrito
                     </button>
                 </div>
 
@@ -59,6 +70,7 @@
             </div>
         </div>
 
+        <!-- Customer reviews: -->
         <div class="flex justify-center mt-40">
             <figure class="max-w-screen-md">
                 <div class="flex items-center mb-4 text-yellow-300">
@@ -88,6 +100,7 @@
 </section>
 
 
+<!-- Cart showroom: -->
 <div 
     class="relative z-10" 
     aria-labelledby="slide-over-title" 
@@ -120,65 +133,65 @@
 
                             <div class="mt-8">
                                 <div class="flow-root">
+                                    <!-- Cart lsit: -->
                                     <ul role="list" class="-my-6 divide-y divide-gray-200">
-                                        <li class="flex py-6">
+                                        <li *ngFor="let salad of cartOfSalads" class="flex py-6">
                                             <div class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                                <img src="https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg" alt="Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt." class="h-full w-full object-cover object-center">
+                                                <img 
+                                                    src="https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg" 
+                                                    alt="Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt." 
+                                                    class="h-full w-full object-cover object-center"
+                                                >
                                             </div>
 
                                             <div class="ml-4 flex flex-1 flex-col">
                                                 <div>
                                                     <div class="flex justify-between text-base font-medium text-gray-900">
                                                         <h3>
-                                                            <a href="#">Throwback Hip Bag</a>
+                                                            <a href="#">
+                                                                {{salad.saladTypeTitle}}
+                                                            </a>
                                                         </h3>
-                                                        <p class="ml-4">$90.00</p>
+                                                        <p class="ml-4">${{salad.saladTypePrice}}</p>
                                                     </div>
-                                                    <p class="mt-1 text-sm text-gray-500">
-                                                        Salmon
-                                                    </p>
-                                                    </div>
-                                                    <div class="flex flex-1 items-end justify-between text-sm">
-                                                    <p class="text-gray-500">
-                                                        Cantidad 1
-                                                    </p>
-
-                                                    <div class="flex">
-                                                        <button type="button" class="font-medium text-indigo-600 hover:text-indigo-500">
-                                                            Remover
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-
-                                        <li class="flex py-6">
-                                            <div class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                                <img src="https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg" alt="Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch." class="h-full w-full object-cover object-center">
-                                            </div>
-
-                                            <div class="ml-4 flex flex-1 flex-col">
-                                                <div>
-                                                    <div class="flex justify-between text-base font-medium text-gray-900">
-                                                        <h3>
-                                                            <a href="#">Medium Stuff Satchel</a>
-                                                        </h3>
-                                                        <p class="ml-4">$32.00</p>
-                                                    </div>
-                                                    <p class="mt-1 text-sm text-gray-500">Blue</p>
                                                 </div>
                                                 <div class="flex flex-1 items-end justify-between text-sm">
-                                                    <p class="text-gray-500">Cantidad 1</p>
+                                                    <div class="flex flex-row justify-between space-x-2">
+                                                        <button 
+                                                            (click)="decrementQuantity()"
+                                                            type="button" 
+                                                            class="text-xs font-medium text-center text-black bg-white-700 
+                                                            rounded-full hover:bg-white-800 focus:outline-none focus:ring-white-300 dark:bg-white-600 
+                                                            dark:hover:bg-white-700"
+                                                        >
+                                                            -
+                                                        </button>
+                                                        <button
+                                                            (click)="incrementQuantity()" 
+                                                            type="button" 
+                                                            class="text-xs font-medium text-center text-black bg-white-700 
+                                                            rounded-full hover:bg-white-800 focus:outline-none focus:ring-white-300 dark:bg-white-600 
+                                                            dark:hover:bg-white-700"
+                                                        >
+                                                            +
+                                                        </button>
+                                                    </div>
+                                                    <p class="text-gray-500">
+                                                        Cantidad {{cartTotal}}
+                                                    </p>
 
                                                     <div class="flex">
-                                                        <button type="button" class="font-medium text-indigo-600 hover:text-indigo-500">
+                                                        <button 
+                                                            (click)="removeFromCart(salad.id)"
+                                                            type="button" 
+                                                            class="font-medium text-indigo-600 hover:text-indigo-500"
+                                                        >
                                                             Remover
                                                         </button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </li>
-                                        <!-- More products... -->
                                     </ul>
                                 </div>
                             </div>
@@ -190,7 +203,7 @@
                                     Subtotal
                                 </p>
                                 <p>
-                                    $262.00MXN
+                                    ${{this.saladService.totalCartPrice}}MXN
                                 </p>
                             </div>
                             <p class="mt-0.5 text-sm text-gray-500">

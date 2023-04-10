@@ -15,7 +15,6 @@ import { PaymentComponent } from './payment/payment.component';
 import { PrivacyPolicyComponent } from './footer/privacy-policy/privacy-policy.component';
 import { ConditionsTermsComponent } from './footer/conditions-terms/conditions-terms.component';
 import { AboutComponent } from './navbar/about/about.component';
-import { ReviewComponent } from './navbar/review/review.component';
 import { ContactComponent } from './navbar/contact/contact.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { LoginComponent } from './auth/login/login.component';
@@ -38,7 +37,6 @@ import { TableIngredientsComponent } from './admin/table-ingredients/table-ingre
     PrivacyPolicyComponent,
     ConditionsTermsComponent,
     AboutComponent,
-    ReviewComponent,
     ContactComponent,
     NotFoundComponent,
     LoginComponent,

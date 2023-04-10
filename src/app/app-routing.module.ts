@@ -11,7 +11,6 @@ import { ListadoComponent } from './home/listado/listado.component';
 import { ProductComponent } from './home/product/product.component';
 import { AboutComponent } from './navbar/about/about.component';
 import { ContactComponent } from './navbar/contact/contact.component';
-import { ReviewComponent } from './navbar/review/review.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { PaymentComponent } from './payment/payment.component';
 
@@ -25,7 +24,7 @@ const routes: Routes = [
     component: ListadoComponent
   },
   {
-    path: 'producto',
+    path: 'producto/:id',
     component: ProductComponent
   },
   {
@@ -43,10 +42,6 @@ const routes: Routes = [
   {
     path: 'about',
     component: AboutComponent
-  },
-  {
-    path: 'review',
-    component: ReviewComponent
   },
   {
     path: 'contact',
